@@ -61,9 +61,9 @@ class CalendarHeader extends Component{
     render(){
         return(
             <div className="header-month">
-                <Link to={`/calendar/${this.getPreviousMonth().newYear}/${this.getPreviousMonth().newMonth}/`}>Previous</Link>
+                <Link className="movingLink" to={`/calendar/${this.getPreviousMonth().newYear}/${this.getPreviousMonth().newMonth}/`}>Previous</Link>
                 <h1 className="month-name">{this.monthsList[this.state.currentMonth-1]} {this.state.currentYear}</h1>
-                <Link to={`/calendar/${this.getNextMonth().newYear}/${this.getNextMonth().newMonth}/`}>Next</Link>
+                <Link className="movingLink" to={`/calendar/${this.getNextMonth().newYear}/${this.getNextMonth().newMonth}/`}>Next</Link>
             </div>
         )
     }

@@ -66,7 +66,6 @@ class CalendarPicker extends Component{
                     {this.renderDates()}
                 </div>
             </div>
-
         )
     }
 }

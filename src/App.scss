@@ -36,8 +36,11 @@
   align-items: center;
   padding: 20px;
 
-  .pointer {
-    cursor: pointer
+  .movingLink {
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+    color: rgba(73,116,255,0.44);
   }
 
   .month-name{

@@ -30,8 +30,11 @@
   justify-content: space-around;
   align-items: center;
   padding: 20px; }
-  .header-month .pointer {
-    cursor: pointer; }
+  .header-month .movingLink {
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+    color: rgba(73, 116, 255, 0.44); }
   .header-month .month-name {
     width: 400px; }
 
