@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import CalendarHeader from './components/calendar-header'
-import CalendarPicker from './components/calendar-picker'
-import CalendarNav from './components/calendar-nav'
+import Calendar from './components/calendar'
+import CalendaNav from './components/calendar-nav'
+import { BrowserRouter, Route } from 'react-router-dom'
+
 
 class App extends Component {
 
@@ -12,6 +13,7 @@ class App extends Component {
   constructor(props){
     super(props);
       const now = new Date();
+      console.log(this.props)
 
       this.state = {
         todayDate: now,
@@ -40,11 +42,12 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-          <CalendarNav/>
-          <CalendarHeader currentDate={this.state.currentDate} onMonthChange={this.onMonthChange}/>
-          <CalendarPicker datePickerData={this.state}/>
-      </div>
+        <BrowserRouter>
+            <div className="App">
+                <CalendaNav/>
+                <Route path="/calendar/:year/:month" component={Calendar}/>
+            </div>
+        </BrowserRouter>
     );
   }
 }

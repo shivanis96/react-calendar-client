@@ -12,10 +12,10 @@ class CalendarPicker extends Component{
     }
 
     renderDays(){
-        let weekArray1 = this.monthsList.slice(this.props.datePickerData.currentFirstDay);
-        let weekArray2 = this.monthsList.slice(0,this.props.datePickerData.currentFirstDay);
-        let fullWeekArray = weekArray1.concat(weekArray2);
-        return fullWeekArray.map(value =>(
+        // let weekArray1 = this.monthsList.slice(this.props.datePickerData.currentFirstDay);
+        // let weekArray2 = this.monthsList.slice(0,this.props.datePickerData.currentFirstDay);
+        // let fullWeekArray = weekArray1.concat(weekArray2);
+        return this.monthsList.map(value =>(
                 <div key={value}>
                     {value}
                 </div>
@@ -28,7 +28,7 @@ class CalendarPicker extends Component{
         for (let i=0; i< this.props.datePickerData.currentFirstDay; i++){
             fullDateArray.push('');
         }
-        for (let i=1; i< this.props.datePickerData.daysTotal; i++){
+        for (let i=1; i <= this.props.datePickerData.daysTotal; i++){
             fullDateArray.push(i);
         }
         while(fullDateArray.length % 7 !==0 ){
@@ -40,7 +40,6 @@ class CalendarPicker extends Component{
         while (fullDateArray.length > 0)
             weeksArrays.push(fullDateArray.splice(0, size));
 
-        console.log(weeksArrays);
 
         return weeksArrays.map(week =>(
             <div className="header-month">
