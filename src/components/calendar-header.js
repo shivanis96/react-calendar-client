@@ -1,29 +1,49 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom'
 
 class CalendarHeader extends Component{
 
+    static getDerivedStateFromProps(nextProps, prevState){
+        if(nextProps.currentData.currentMonth ===prevState.currentMonth && nextProps.currentData.currentYear ===prevState.currentYear){
+            return null;
+        }
+        const stateObj = {
+            currentMonth: nextProps.currentData.currentMonth,
+            currentYear: nextProps.currentData.currentYear,
+        }
+        return stateObj;
+    }
+
     getNextMonth= () =>{
-        let next = (this.state.currentMonth + 1);
+        // -2 to turn to index value of month
+        let next = (this.state.currentMonth);
         if(next > 11){
-            this.setState({currentYear: this.state.currentYear + 1},()=>{
-                next = next % 12;
-                this.setState({currentMonth: next}, ()=> this.props.onMonthChange(this.state))
-            });
-            next = next % 12
+            return {
+                newMonth: (next % 12 )+1,
+                newYear: parseInt(this.state.currentYear) + 1
+            }
+
         }else{
-            this.setState({currentMonth: next}, ()=> this.props.onMonthChange(this.state))
+            return {
+                newMonth: (next % 12 )+ 1,
+                newYear: parseInt(this.state.currentYear)
+            }
         }
     }
 
     getPreviousMonth= () =>{
-        let prev = (this.state.currentMonth - 1) % 12;
-        if (prev < 0){
-            this.setState({currentYear: this.state.currentYear-1},()=>{
-                prev =+ 11;
-                this.setState({currentMonth: prev}, ()=> this.props.onMonthChange(this.state))
-            })
+        let prev = (this.state.currentMonth - 2) % 12;
+        if(prev < 0){
+            return {
+                newMonth: prev + 12,
+                newYear: parseInt(this.state.currentYear) - 1
+            }
+
         }else{
-            this.setState({currentMonth: prev}, ()=> this.props.onMonthChange(this.state))
+            return {
+                newMonth: prev +1,
+                newYear: parseInt(this.state.currentYear)
+            }
         }
     }
 
@@ -31,10 +51,9 @@ class CalendarHeader extends Component{
         super(props);
 
         this.monthsList = ['January', 'February', 'March', 'April', 'May', 'June' , 'July', 'August', 'September', 'October', 'November', 'December']
-
         this.state = {
-            currentMonth: this.props.currentDate.getMonth(),
-            currentYear: this.props.currentDate.getFullYear()
+            currentMonth: this.props.currentData.currentMonth,
+            currentYear: this.props.currentData.currentYear
         }
 
     }
@@ -42,10 +61,9 @@ class CalendarHeader extends Component{
     render(){
         return(
             <div className="header-month">
-                <a onClick={this.getPreviousMonth} className="pointer">&lt;Previous</a>
-                <h1 className="month-name">{this.monthsList[this.state.currentMonth]} {this.state.currentYear}</h1>
-                <a onClick={this.getNextMonth} className="pointer">Next&gt;</a>
-
+                <Link to={`/calendar/${this.getPreviousMonth().newYear}/${this.getPreviousMonth().newMonth}/`}>Previous</Link>
+                <h1 className="month-name">{this.monthsList[this.state.currentMonth-1]} {this.state.currentYear}</h1>
+                <Link to={`/calendar/${this.getNextMonth().newYear}/${this.getNextMonth().newMonth}/`}>Next</Link>
             </div>
         )
     }

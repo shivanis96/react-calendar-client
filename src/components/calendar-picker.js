@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 
 class CalendarPicker extends Component{
 
-
     constructor(props){
         super(props);
 
@@ -42,7 +41,7 @@ class CalendarPicker extends Component{
 
 
         return weeksArrays.map(week =>(
-            <div className="header-month">
+            <div key={weeksArrays.indexOf(week)} className="header-month">
                 {this.renderRows(week)}
             </div>
         ));
@@ -50,8 +49,8 @@ class CalendarPicker extends Component{
     }
 
     renderRows(week) {
-        return week.map(value => (
-            <div className="calendar-column">
+        return week.map((value,index) => (
+            <div key={index} className="calendar-column">
                 {value}
             </div>
         ))
