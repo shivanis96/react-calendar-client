@@ -1,5 +1,5 @@
 const express = require('express');
-const validateInput = require('../shared/validations/signup')
+const validateInput = require('../src/shared/validations/signup')
 let router = express.Router();
 
 

@@ -1,8 +1,10 @@
 import React from 'react';
 import map from 'lodash/map';
 import classnames from 'classnames';
-import validateInput from '../../shared/validations/signup';
+import validateInput from '../shared/validations/signup';
 import TextFieldGroup from './common/TextFieldGroup';
+import PropTypes from 'prop-types'
+
 
 class SignupForm extends React.Component {
     constructor(props) {
@@ -19,7 +21,7 @@ class SignupForm extends React.Component {
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.checkUserExists = this.checkUserExists.bind(this);
+        //this.checkUserExists = this.checkUserExists.bind(this);
     }
 
     onChange(e) {
@@ -36,24 +38,24 @@ class SignupForm extends React.Component {
         return isValid;
     }
 
-    checkUserExists(e) {
-        const field = e.target.name;
-        const val = e.target.value;
-        if (val !== '') {
-            this.props.isUserExists(val).then(res => {
-                let errors = this.state.errors;
-                let invalid;
-                if (res.data.user) {
-                    errors[field] = 'There is user with such ' + field;
-                    invalid = true;
-                } else {
-                    errors[field] = '';
-                    invalid = false;
-                }
-                this.setState({ errors, invalid });
-            });
-        }
-    }
+    // checkUserExists(e) {
+    //     const field = e.target.name;
+    //     const val = e.target.value;
+    //     if (val !== '') {
+    //         this.props.isUserExists(val).then(res => {
+    //             let errors = this.state.errors;
+    //             let invalid;
+    //             if (res.data.user) {
+    //                 errors[field] = 'There is user with such ' + field;
+    //                 invalid = true;
+    //             } else {
+    //                 errors[field] = '';
+    //                 invalid = false;
+    //             }
+    //             this.setState({ errors, invalid });
+    //         });
+    //     }
+    // }
 
     onSubmit(e) {
         e.preventDefault();
@@ -78,7 +80,7 @@ class SignupForm extends React.Component {
 
         return (
             <form onSubmit={this.onSubmit}>
-                <h1>Join our community!</h1>
+                <h1>Sign Up for the calendar</h1>
 
                 <TextFieldGroup
                     error={errors.username}
@@ -89,14 +91,7 @@ class SignupForm extends React.Component {
                     field="username"
                 />
 
-                <TextFieldGroup
-                    error={errors.email}
-                    label="Email"
-                    onChange={this.onChange}
-                    checkUserExists={this.checkUserExists}
-                    value={this.state.email}
-                    field="email"
-                />
+
 
                 <TextFieldGroup
                     error={errors.password}
@@ -127,13 +122,13 @@ class SignupForm extends React.Component {
 }
 
 SignupForm.propTypes = {
-    userSignupRequest: React.PropTypes.func.isRequired,
-    addFlashMessage: React.PropTypes.func.isRequired,
-    isUserExists: React.PropTypes.func.isRequired
+    userSignupRequest: PropTypes.func.isRequired,
+    addFlashMessage: PropTypes.func.isRequired,
+    //isUserExists: React.PropTypes.func.isRequired
 }
 
 SignupForm.contextTypes = {
-    router: React.PropTypes.object.isRequired
+    router: PropTypes.object.isRequired
 }
 
 export default SignupForm;

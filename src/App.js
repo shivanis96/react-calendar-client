@@ -3,7 +3,9 @@ import './App.css';
 import Calendar from './components/calendar'
 import CalendaNav from './components/calendar-nav'
 import { BrowserRouter, Route } from 'react-router-dom'
+import SignUpPage from './components/SignUpPage';
 
+import FlashMessagesList from './components/flash/FlashMessagesList'
 
 class App extends Component {
 
@@ -45,7 +47,9 @@ class App extends Component {
         <BrowserRouter>
             <div className="App">
                 <CalendaNav/>
+                <FlashMessagesList/>
                 <Route path="/calendar/:year/:month" component={Calendar}/>
+                <Route path="/signup" component={SignUpPage}/>
             </div>
         </BrowserRouter>
     );

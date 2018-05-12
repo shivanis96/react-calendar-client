@@ -2,16 +2,17 @@ import Validator from 'validator'
 const isEmpty = require('lodash/isEmpty')
 
 
-export default validateInput = (data) => {
+const validateInput = (data) => {
+    debugger
     let errors = {};
     // Extra detail to errors here before trying to add to a db
-    if(Validator.isNull(data.username)){
+    if(Validator.isEmpty(data.username)){
         errors.username = 'This field is required';
     }
-    if(Validator.isNull(data.password)){
+    if(Validator.isEmpty(data.password)){
         errors.password = 'This field is required';
     }
-    if(Validator.isNull(data.passwordConfirmation)){
+    if(Validator.isEmpty(data.passwordConfirmation)){
         errors.passwordConfirmation = 'This field is required';
     }
     // This is okay as both errors wont show
@@ -24,3 +25,5 @@ export default validateInput = (data) => {
         isValid: isEmpty(errors)
     }
 }
+
+export default validateInput;
