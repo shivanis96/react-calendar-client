@@ -5,12 +5,13 @@ import registerServiceWorker from './registerServiceWorker';
 import App from './App';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
-import reduxThunk from 'redux-think';
-import reduxLogger from 'redux-logger'
+import reduxThunk from 'redux-thunk';
+import reduxLogger from 'redux-logger';
+import rootReducer from './rootReducer'
 
 
 const store = createStore(
-    (state = {}) => state,
+    rootReducer,
     compose(
         applyMiddleware(reduxThunk,reduxLogger),
         window.devToolsExtension ? window.devToolsExtension() : f => f
