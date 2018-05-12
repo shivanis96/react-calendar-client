@@ -1,15 +1,14 @@
-const express = require('express');
+import express from 'express'
 // Add body parser to deal with requests
-const bodyParser = require('body-parser')
-const path = require('path');
-const signup = require('./routes/signup')
+import bodyParser from 'body-parser'
+import path from'path';
+import signup from './routes/signup'
 
 //Start express
 const app = express();
 //load static files
 app.use(bodyParser.json());
-
-app.use('api/signup',signup);
+app.use('api/calendar',signup);
 
 app.use(express.static(path.join(__dirname, 'build')));
 

@@ -3,7 +3,6 @@ const isEmpty = require('lodash/isEmpty')
 
 
 const validateInput = (data) => {
-    debugger
     let errors = {};
     // Extra detail to errors here before trying to add to a db
     if(Validator.isEmpty(data.username)){

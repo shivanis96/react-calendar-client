@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classnames from'classnames;'
+import classnames from 'classnames';
 
-class FlashMessagesList extends Component{
+class FlashMessages extends Component{
     constructor(props){
         super(props);
         this.onClick = this.onClick.bind(this);
@@ -12,7 +12,7 @@ class FlashMessagesList extends Component{
         this.props.deleteFlashMessage(this.props.message.id)
     }
     render(){
-        const{ id, type, text } = this.prop.message;
+        const{ id, type, text } = this.props.message;
         return(
             <div className={classnames('alert',{
                 'alter-success':type === 'success',
