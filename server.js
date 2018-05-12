@@ -8,7 +8,7 @@ import signup from './routes/signup'
 const app = express();
 //load static files
 app.use(bodyParser.json());
-app.use('api/calendar',signup);
+app.use(signup);
 
 app.use(express.static(path.join(__dirname, 'build')));
 
