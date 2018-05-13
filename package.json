@@ -5,6 +5,7 @@
   "proxy": "http://localhost:8080",
   "dependencies": {
     "axios": "^0.18.0",
+    "bcrypt": "^2.0.1",
     "classnames": "^2.2.5",
     "concurrently": "^3.5.1",
     "express": "^4.16.3",
