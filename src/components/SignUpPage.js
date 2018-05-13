@@ -11,13 +11,13 @@ class SignupPage extends React.Component {
         const {
             userSignupRequest,
             addFlashMessage,
-            // isUserExists
+             isUserExists
         } = this.props;
         return (
             <div className="row flex justify-content-center">
                 <div className="col-md-6 col-md-offset-6">
                     <SignupForm
-                        //isUserExists={isUserExists}
+                        isUserExists={isUserExists}
                         userSignupRequest={userSignupRequest}
                         addFlashMessage={addFlashMessage} />
                 </div>
@@ -29,12 +29,12 @@ class SignupPage extends React.Component {
 SignupPage.propTypes = {
     userSignupRequest: PropTypes.func.isRequired,
     addFlashMessage: PropTypes.func.isRequired,
-    //isUserExists: React.PropTypes.func.isRequired
+    isUserExists: PropTypes.func.isRequired
 }
 
 
 export default connect(null, {
     userSignupRequest,
     addFlashMessage,
-    // isUserExists
+    isUserExists
 })(SignupPage);

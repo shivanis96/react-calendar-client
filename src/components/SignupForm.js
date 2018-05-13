@@ -1,9 +1,8 @@
 import React from 'react';
-import map from 'lodash/map';
-import classnames from 'classnames';
 import validateInput from '../shared/validations/signup';
 import TextFieldGroup from './common/TextFieldGroup';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import isEmpty from 'lodash/isEmpty'
 
 
 class SignupForm extends React.Component {
@@ -21,7 +20,7 @@ class SignupForm extends React.Component {
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        //this.checkUserExists = this.checkUserExists.bind(this);
+        this.checkUserExists = this.checkUserExists.bind(this);
     }
 
     onChange(e) {
@@ -38,24 +37,27 @@ class SignupForm extends React.Component {
         return isValid;
     }
 
-    // checkUserExists(e) {
-    //     const field = e.target.name;
-    //     const val = e.target.value;
-    //     if (val !== '') {
-    //         this.props.isUserExists(val).then(res => {
-    //             let errors = this.state.errors;
-    //             let invalid;
-    //             if (res.data.user) {
-    //                 errors[field] = 'There is user with such ' + field;
-    //                 invalid = true;
-    //             } else {
-    //                 errors[field] = '';
-    //                 invalid = false;
-    //             }
-    //             this.setState({ errors, invalid });
-    //         });
-    //     }
-    // }
+    checkUserExists(e) {
+        const field = e.target.name;
+        const val = e.target.value;
+        if (val !== '') {
+            this.props.isUserExists(val)
+                .then(res => {
+                    let errors = this.state.errors;
+                    let invalid;
+                    if (!isEmpty(res.data)){
+                        errors[field] = 'There is user with such ' + field;
+                        invalid = true;
+                    } else{
+                        errors[field] = '';
+                        invalid = false;
+                    }
+                    this.setState({ errors, invalid });
+                })
+                .catch(err => console.log(err.response))
+            ;
+        }
+    }
 
     onSubmit(e) {
         e.preventDefault();
@@ -70,7 +72,7 @@ class SignupForm extends React.Component {
                     });
                     this.context.router.history.push('/');
                 },
-                (err) => this.setState({ errors: err.response.data, isLoading: false })
+                (err) => this.setState({ errors: err.response.data , isLoading: false })
             );
         }
     }
@@ -124,7 +126,7 @@ class SignupForm extends React.Component {
 SignupForm.propTypes = {
     userSignupRequest: PropTypes.func.isRequired,
     addFlashMessage: PropTypes.func.isRequired,
-    //isUserExists: React.PropTypes.func.isRequired
+    isUserExists: PropTypes.func.isRequired
 }
 
 SignupForm.contextTypes = {

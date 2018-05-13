@@ -54,5 +54,9 @@
     justify-content: space-around;
     flex: 0.25;
     margin: 30px; }
-  .calendar-nav .has-error {
-    background-color: #ff8482; }
+
+.has-error {
+  color: #ff8482; }
+
+.help-block {
+  colour: #ff8482; }
